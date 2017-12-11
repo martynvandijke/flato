@@ -1,0 +1,655 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34785646-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-34785646-3');
+    </script>
+
+    <!-- Font import -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import css-->
+    <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="static/css/grid.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="static/css/palette.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="static/css/emoji.css"  media="screen,projection"/>
+
+    <title>
+      Fireworder
+    </title>
+    <link rel="shortcut icon" href="static/images/icon/iconpng.ico" />
+    <!-- meta deta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper dark-primary-color">
+        <a href="#!" class="brand-logo center"><img height="50em" src="static/images/icon/iconpng.png"/></a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <div class="userinfo">
+          <div class="right-align">
+
+            <div class="right">
+              <div class="left">
+                <a class="modal-trigger" href="#account"><i class="material-icons">account_circle</i></a>
+              </div>
+              &nbsp; <a class="modal-trigger" href="#account">
+              {{ user_name }}
+              &nbsp;</a>
+              <div class="right">
+                <a class="modal-trigger" href="#settings"><i class="material-icons">settings</i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="right hide-on-med-and-down">
+           <li><a href="/logout">Logout</a></li>
+           <li><a class="modal-trigger" href="#account">Account</a></li>
+           <li><a class="modal-trigger" href="#settings">Settings</a></li>
+        </ul>
+
+        <ul class="side-nav" id="mobile-demo">
+           <li><a href="/logout">Logout</a></li>
+           <li><a class="modal-trigger" href="#account">Account</a></li>
+           <li><a class="modal-trigger" href="#settings">Settings</a></li>
+        </ul>
+        </div>
+    </nav>
+<!--Modal's -->
+
+    <div id="updatedb" class="modal">
+    <div class="modal-content">
+      <h4>Database is updated</h4>
+      <p>
+       <br>
+        Data has been updated for : <br>
+
+        {% if wheater %}
+          Wheater database <i class="em em-white_check_mark"></i> <br>
+        {% else %}
+          Wheater API error <i class="material-icons">error</i> <br>
+        {% endif %}
+
+        {% if daily %}
+          Daily picture database <i class="em em-white_check_mark"></i><br>
+        {% else %}
+          Daily API error <i class="material-icons">error</i> <br>
+        {% endif %}
+
+        {% if verge %}
+          Verge news database <i class="em em-white_check_mark"></i><br>
+        {% else %}
+          Verge API error<i class="material-icons">error</i> <br>
+        {% endif %}
+
+        {% if movie %}
+          Movie database <i class="em em-white_check_mark"></i> <br>
+        {% else %}
+          Movie API error <i class="material-icons">error</i> <br>
+        {% endif %}
+
+        {% if stock %}
+          Stock database <i class="em em-white_check_mark"></i> <br>
+        {% else %}
+          Stock API error <i class="material-icons">error</i> <br>
+        {% endif %}
+
+        {% if f1 %}
+          F1 database <i class="em em-white_check_mark"></i> <br>
+        {% else %}
+          F1 API error <i class="material-icons">error</i> <br>
+        {% endif %}
+
+
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+
+<div id="settings" class="modal">
+  <div class="modal-content">
+    <h4 class="primary-text-color">Settings</h4>
+    <ul class="tabs">
+      <li class="tab col s4">
+        <a href="#tab1">General</a>
+      </li>
+      <li class="tab col s4">
+        <a href="#tab2">Show/hide card</a>
+      </li>
+      <li class="tab col s4">
+        <a href="#tab3">Wheater</a>
+      </li>
+    </ul>
+    <div id="tab1" class="col s12">
+      <form action="updatedb/" method="post">{% csrf_token %}
+        <br>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Update db
+          <i class="material-icons right">update</i>
+        </button>
+        <br>
+      </form>
+    </div>
+
+    <div id="tab3" class="col s12">
+      <br />
+
+      <div class="card hoverable">
+        <div class="container">
+          <br>
+          <form action="/wheater" method="post">{% csrf_token %}
+            <input placeholder="Search city" id="search" type="text" name="city" class="validate">
+            <br>
+        </div>
+      </div>
+      <br />
+      <br />
+      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </form>
+    </div>
+
+    <div id="tab2" class="col s12">
+      <form action="#">
+        <div class="row">
+          <br />
+          <div class="switch col s6 m4 l2 roomsetting secondary-text-color">
+            Room temprature <br />
+            <label>
+              Off
+              <input type="checkbox" checked>
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+          <div class="switch col s6 m4 l2 wheatersetting secondary-text-color">
+            Wheater <br />
+            <label>
+              Off
+              <input type="checkbox" checked>
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+
+          <div class="switch col s6 m4 l2 dailysetting secondary-text-color">
+            Daily photo <br />
+            <label>
+              Off
+              <input type="checkbox" checked>
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+          <div class="switch col s6 m4 l2 vergesetting secondary-text-color">
+            Verge <br />
+            <label>
+              Off
+              <input type="checkbox" checked>
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+          <div class="switch col s6 m4 l2 stocksetting secondary-text-color">
+            Stock <br />
+            <label>
+              Off
+              <input type="checkbox" checked >
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+          <div class="switch col s6 m4 l2 f1setting secondary-text-color">
+            F1 <br />
+            <label>
+              Off
+              <input type="checkbox" checked >
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+          <div class="switch col s6 m4 l2 moviesetting secondary-text-color">
+            Movie <br />
+            <label>
+              Off
+              <input type="checkbox" checked >
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+
+        </div>
+
+      </br>
+      <!-- <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+      </button> -->
+    </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+  </div>
+</div>
+
+<div id="account" class="modal">
+  <div class="modal-content">
+    <h4 class="primary-text-color">Account settings</h4>
+    <div class="row">
+  <form class="col s12" action="/update" method="post">{% csrf_token %}
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">account_circle</i>
+        <input placeholder="{{first_name}}" id="icon_prefix" name="firstname" type="text" class="validate">
+        <label for="icon_prefix">First Name</label>
+      </div>
+      <div class="input-field col s6">
+        <i class="material-icons prefix">account_circle</i>
+        <input placeholder="{{last_name}}" id="icon_prefix" name="lastname" type="text" class="validate">
+        <label for="icon_prefix">Last Name</label>
+      </div>
+      <div class="input-field col s12">
+            <i class="material-icons prefix">face</i>
+           <input placeholder="{{user_name}}" id="icon_prefix" name="username" type="text" class="validate">
+           <label for="icon_prefix">User name</label>
+        </div>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+      <i class="material-icons right">send</i>
+    </button>
+  </form>
+</div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col s12 cards-container">
+
+      <div class="card accent-color hoverable room">
+        <div class="card-content white-text">
+              <span class="card-title">Room temprature</span>
+              <p>Right now it is : 18  C°</p>
+          </div>
+      </div>
+
+        <div class="card hoverable wheater">
+          <div class="card-image waves-effect waves-block waves-light">
+             <img class="activator" src="static/images/wheater/{{wheater_day1_icon}}.png">
+           </div>
+           <div class="card-content">
+             <span class="card-title activator primary-text-color">{{wheater_city }}<i class="material-icons right">more_vert</i></span>
+             <center>
+              <span> {{wheater_today}} C°</span>
+             </center>
+           </div>
+           <div class="card-reveal">
+             <span class="card-title grey-text text-darken-4">Forecast for {{wheater_city }} , {{wheater_province }} , {{wheater_country }} <i class="material-icons right">close</i></span>
+             <br />
+             <table >
+               <thead>
+                 <tr>
+                     <th>Day</th>
+                     <th>Min</th>
+                     <th>Max</th>
+                     <th>Wheater</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                   <td>Today</td>
+                   <td>{{wheater_day1_min}} C°</td>
+                   <td>{{wheater_day1_max}} C°</td>
+                   <td><img width="28px" src="static/images/wheater/{{wheater_day1_icon}}.png"></td>
+                 </tr>
+                 <tr>
+                   <td>{{day2}}</td>
+                   <td>{{wheater_day2_min}} C°</td>
+                   <td>{{wheater_day2_min}} C°</td>
+                   <td><img width="28px" src="static/images/wheater/{{wheater_day2_icon}}.png"></td>
+                 </tr>
+                 <tr>
+                   <td>{{day3}}</td>
+                   <td>{{wheater_day3_min}} C°</td>
+                   <td>{{wheater_day3_max}} C°</td>
+                   <td><img width="28px" src="static/images/wheater/{{wheater_day3_icon}}.png"></td>
+                 </tr>
+               </tbody>
+             </table>
+           </div>
+         </div>
+
+        <div class="card hoverable daily">
+            <div class="card-image">
+              <img class="responsive-img daily" src="http://www.bing.com/{{ daily_url }}">
+              <span class="card-title">Daily photo</span>
+              <a href="{{ daily_link}}" class="btn-floating halfway-fab waves-effect waves-light accent-color"><i class="material-icons">pageview</i></a>
+            </div>
+            <div class="card-content">
+              <p class="secondary-text-color">Bing photo of the day </p>
+            </div>
+          </div>
+
+          <div class="card hoverable verge">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="{{verge_image }}">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">Verge news<i class="material-icons right">more_vert</i></span>
+              <p><a href="{{verge_url}}}">theverge.com</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">{{ verge_title}} <i class="material-icons right">close</i></span>
+              <p>{{ verge_description}}</p>
+            </div>
+          </div>
+          <div class="card accent-color hoverable stock">
+            <div class="card-content white-text">
+                  <span class="card-title">{{ stock_companyname }}  stock</span>
+                  <p>Google stock is right now : {{ stock_price }} USD</p>
+                  <p>
+                    Wich is {{stock_changepercent }} %
+                  </p>
+                  </div>
+          </div>
+          <div class="card hoverable f1">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="static/images/f1/next.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">Upcoming F1 race<i class="material-icons right">more_vert</i></span>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">{{ f1_name }}<i class="material-icons right">close</i></span>
+              <table >
+                <thead>
+                  <tr>
+                      <th>Round</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{f1_round}}</td>
+                    <td>{{f1_date}}</td>
+                    <td>{{f1_time}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card hoverable movie">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="http://image.tmdb.org/t/p/w780/{{movie_poster}}">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">{{ movie_title }}<i class="material-icons right">more_vert</i></span>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">{{ movie_title }}<i class="material-icons right">close</i></span>
+              <p>
+                {{ movie_overview }}
+              </p>
+            </div>
+          </div>
+
+
+    </div>
+  </div>
+</div>
+<footer class="page-footer dark-primary-color">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">Fireworder <img height="50em" src="static/images/icon/iconpng.png"/></h5>
+        <p class="grey-text text-lighten-4">Made for the 2ID60 Web technology course given on the TU/e</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+    © 2017 Copyright TU/e
+    <a class="grey-text text-lighten-4 right" href="https://www.tue.nl/">TU/e</a>
+    </div>
+  </div>
+</footer>
+
+
+<!--Import js -->
+<script type="text/javascript" src="static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="static/js/materialize.min.js"></script>
+<!--Material design -->
+<script type="text/javascript">
+  $(".button-collapse").sideNav();
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+
+  $('ul.tabs').tabs('select_tab', 'tab1');
+</script>
+    <script>
+    $( document ).ready(function() {
+
+    if("{{room_status}}" == "off"){
+    $( ".room" ).hide();
+    }
+
+    if("{{wheater_status}}" == "off"){
+    $( ".wheater" ).hide();
+    }
+
+    if("{{daily_status}}" == "off"){
+    $( ".daily" ).hide();
+    }
+
+    if("{{verge_status}}" == "off"){
+    $( ".verge" ).hide();
+    }
+
+    if("{{stock_status}}" == "off"){
+    $( ".stock" ).hide();
+    }
+
+    if("{{movie_status}}" == "off"){
+    $( ".movie" ).hide();
+    }
+
+    if("{{f1_status}}" == "off"){
+    $( ".f1" ).hide();
+    }
+
+    });
+    </script>
+
+
+<!-- Hide cards sript  -->
+<script>
+$(document).ready(function(){
+  $(".stocksetting").find("input[type=checkbox]").on("change",function() {
+       var status = $(this).prop('checked');
+
+        $.ajax({
+        url: '/updatestock',
+        data: {
+          'stock': status
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A user with this username already exists.");
+          }
+        }
+      });
+
+       if(status == true){
+          $( ".stock" ).fadeIn();
+       }
+       else {
+         $( ".stock" ).fadeOut();
+       }
+   });
+   $(".vergesetting").find("input[type=checkbox]").on("change",function() {
+        var status = $(this).prop('checked');
+
+        $.ajax({
+        url: '/updateverge',
+        data: {
+          'verge': status
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A user with this username already exists.");
+          }
+        }
+      });
+
+        if(status == true){
+           $( ".verge" ).fadeIn();
+        }
+        else {
+          $( ".verge" ).fadeOut();
+        }
+    });
+    $(".dailysetting").find("input[type=checkbox]").on("change",function() {
+         var status = $(this).prop('checked');
+
+        $.ajax({
+        url: '/updatedaily',
+        data: {
+          'daily': status
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A user with this username already exists.");
+          }
+        }
+      });
+
+         if(status == true){
+            $( ".daily" ).fadeIn();
+         }
+         else {
+           $( ".daily" ).fadeOut();
+         }
+     });
+     $(".wheatersetting").find("input[type=checkbox]").on("change",function() {
+          var status = $(this).prop('checked');
+
+        $.ajax({
+        url: '/updatewheater',
+        data: {
+          'wheater': status
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A user with this username already exists.");
+          }
+        }
+      });
+
+          if(status == true){
+             $( ".wheater" ).fadeIn();
+          }
+          else {
+            $( ".wheater" ).fadeOut();
+          }
+      });
+      $(".roomsetting").find("input[type=checkbox]").on("change",function() {
+           var status = $(this).prop('checked');
+
+        $.ajax({
+        url: '/updateroom',
+        data: {
+          'room': status
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A user with this username already exists.");
+          }
+        }
+      });
+
+           if(status == true){
+              $( ".room" ).fadeIn();
+           }
+           else {
+             $( ".room" ).fadeOut();
+           }
+       });
+       $(".f1setting").find("input[type=checkbox]").on("change",function() {
+            var status = $(this).prop('checked');
+
+        $.ajax({
+        url: '/updatef1',
+        data: {
+          'f1': status
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A user with this username already exists.");
+          }
+        }
+      });
+
+            if(status == true){
+               $( ".f1" ).fadeIn();
+            }
+            else {
+              $( ".f1" ).fadeOut();
+            }
+        });
+        $(".moviesetting").find("input[type=checkbox]").on("change",function() {
+        var status = $(this).prop('checked');
+
+        $.ajax({
+        url: '/updatemovie',
+        data: {
+          'movie': status
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A user with this username already exists.");
+          }
+        }
+      });
+
+             if(status == true){
+                $( ".movie" ).fadeIn();
+             }
+             else {
+               $( ".movie" ).fadeOut();
+             }
+         });
+ });
+
+</script>
+<script>
+
+    $(document).ready(function(){
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+        if("{{updatedb}}" == "yes")
+        {
+            $('#updatedb').modal('open');
+        }
+  });
+
+</script>
