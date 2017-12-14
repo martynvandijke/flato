@@ -1,8 +1,26 @@
 from django.contrib.auth import views as auth_views
+from .models import News
 from rest_framework import serializers, viewsets, routers
 from . import views
 from django.conf.urls import include, url
 
+
+class DataSerilizer(serializers.ModelSerializer):
+
+    class Meta:
+        model = News
+        fields = ( 'news_source','news_title','news_description',
+                   'news_date','news_author','news_image','news_link'
+                  )
+
+class DataViewSet(viewsets.ModelViewSet):
+    queryset = News.objects.all()
+    serializer_class = DataSerilizer
+
+
+
+router = routers.DefaultRouter()
+router.register(r'data', DataViewSet)
 
 
 
@@ -10,4 +28,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'registration/logout.html'}, name='logout'),
+    url(r'^', include(router.urls)),
+
 ]
+

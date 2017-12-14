@@ -3,7 +3,7 @@
 user account:
 
 user : webtech
-pass : test
+pass : testthis
 
 
 # To do list :
