@@ -5,7 +5,6 @@ import json, requests
 from django.template import loader
 from django.shortcuts import redirect
 
-# Create your views here.
 
 
 
@@ -13,7 +12,9 @@ def index(request):
 
     if request.user.is_authenticated():
                 template = loader.get_template('index.html')
-                context = {  }
+                context = {
+
+                }
                 return HttpResponse(template.render(context, request))
 
     else:

@@ -1,8 +1,14 @@
 # flato
 
+user account:
+
+user : webtech
+pass : test
+
+
 # To do list :
 - [ ] frontpage with apis
-- [ ] account login
+- [x] account login
 - [ ] chat/comment system
 - [ ] topics data api (movies,news,etc)
 - [ ] rest api
