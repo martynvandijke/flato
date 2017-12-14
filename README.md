@@ -11,7 +11,7 @@ pass : testthis
 - [x] account login
 - [ ] chat/comment system
 - [ ] topics data api (movies,news,etc)
-- [ ] rest api
+- [X] rest api
 - [ ] new link generator
 
 
