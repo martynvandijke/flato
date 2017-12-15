@@ -3,6 +3,8 @@ from .models import News
 from rest_framework import serializers, viewsets, routers
 from . import views
 from django.conf.urls import include, url
+from django.views.generic import ListView
+
 
 
 class DataSerilizer(serializers.ModelSerializer):
@@ -25,7 +27,10 @@ router.register(r'data', DataViewSet)
 
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    # url(r'^$', views.index, name='index'),
+    url(r'^update/$', views.update, name='update'),
+    url(r'^$', ListView.as_view(model=News, template_name='index.html'), name='news_list'),
+
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'registration/logout.html'}, name='logout'),
     url(r'^', include(router.urls)),

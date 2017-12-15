@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from autoslug import AutoSlugField
 
 
 ##store data wich belongs to the user itself
@@ -35,3 +36,4 @@ class News(models.Model):
     news_author = models.TextField(null=True, blank=True)
     news_image = models.TextField(null=True, blank=True)
     news_link = models.TextField(null=True, blank=True)
+    news_slug = AutoSlugField(populate_from='news_title',unique=True)

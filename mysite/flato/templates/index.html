@@ -131,20 +131,25 @@
   <div class="row">
     <div class="col s12 cards-container">
 
+      {% for news in news_list %}
 
-          <div class="card hoverable verge">
+        <div class="card hoverable verge">
             <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src="News">
+              <img class="activator" src="{{news.news_image}}">
             </div>
             <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">news title <i class="material-icons right">more_vert</i></span>
-              <p><a href="{{verge_url}}}">Go to post</a></p>
+              <span class="card-title activator grey-text text-darken-4">{{ news_news_title }}<i class="material-icons right">more_vert</i></span>
+              <p><a href="{{news.news_slug}}}">Go to post</a></p>
             </div>
             <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4">{{ verge_title}}<i class="material-icons right">close</i></span>
-              <p>{{ verge_description}}</p>
+              <span class="card-title grey-text text-darken-4">{{ news.news_title}}<i class="material-icons right">close</i></span>
+              <p>{{ news.news_description}}</p>
             </div>
-          </div>
+        </div>
+
+      {% endfor %}
+
+
 
 
 
