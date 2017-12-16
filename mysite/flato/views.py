@@ -5,29 +5,22 @@ import json, requests
 from django.template import loader
 from django.shortcuts import redirect
 from .models import News
-from django.views.generic import ListView, DeleteView
+from django.views.generic import ListView, DetailView
 
 
-class NewsList(DeleteView):
+class NewsList(ListView):
     model = News
     template_name = 'news.html'
 
+class NewsDetailView(DetailView):
+    model = News
+    template_name = 'news.html'
 
 def index(request):
 
-
-
     if request.user.is_authenticated():
                 template = loader.get_template('index.html')
-                print( News.objects.values_list('news_title',flat=True))
                 context = {
-                    "news": News.objects.all(),
-                    'titles': News.objects.values_list('news_title',flat=True),
-                    'sources': News.objects.values_list('news_source',flat=True),
-                    'descriptions': News.objects.values_list('news_description',flat=True),
-                    'dates': News.objects.values_list('news_date', flat=True),
-                    'authors': News.objects.values_list('news_author', flat=True),
-
                 }
                 return HttpResponse(template.render(context, request))
 

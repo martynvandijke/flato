@@ -1,3 +1,4 @@
+{% load static %}
 
 
 <!DOCTYPE html>
@@ -19,10 +20,10 @@
     <!-- Font import -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import css-->
-    <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="static/css/grid.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="static/css/palette.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="static/css/emoji.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/grid.css' %}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/palette.css' %}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/emoji.css' %}"  media="screen,projection"/>
 
     <title>
       Flato
@@ -127,37 +128,12 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col s12 cards-container">
-
-      {% for news in news_list %}
-
-        <div class="card hoverable verge">
-            <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src="{{news.image}}">
-            </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">{{ news.title }}<i class="material-icons right">more_vert</i></span>
-              <p><a href="{{news.slug}}">Go to post</a></p>
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4">{{ news.title}}<i class="material-icons right">close</i></span>
-              <p>{{ news.description}}</p>
-            </div>
-        </div>
-
-      {% endfor %}
 
 
+{% block content %}
+{% endblock %}
 
 
-
-
-
-    </div>
-  </div>
-</div>
 <footer class="page-footer dark-primary-color">
   <div class="container">
     <div class="row">
@@ -177,8 +153,8 @@
 
 
 <!--Import js -->
-<script type="text/javascript" src="static/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="static/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
 <!--Material design -->
 <script type="text/javascript">
   $(".button-collapse").sideNav();
@@ -189,5 +165,5 @@
   $('ul.tabs').tabs('select_tab', 'tab1');
 </script>
 
-
-
+</body>
+</html>

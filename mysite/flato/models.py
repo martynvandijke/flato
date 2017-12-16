@@ -29,11 +29,11 @@ def save_user_profile(sender, instance, **kwargs):
 
 ## news model
 class News(models.Model):
-    news_source = models.TextField(null=True, blank=True)
-    news_title = models.TextField(null=True, blank=True)
-    news_description = models.TextField(null=True, blank=True)
-    news_date = models.TextField(null=True, blank=True)
-    news_author = models.TextField(null=True, blank=True)
-    news_image = models.TextField(null=True, blank=True)
-    news_link = models.TextField(null=True, blank=True)
-    news_slug = AutoSlugField(populate_from='news_title',unique=True)
+    source = models.TextField(null=True, blank=True)
+    title = models.TextField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    date = models.TextField(null=True, blank=True)
+    author = models.TextField(null=True, blank=True)
+    image = models.TextField(null=True, blank=True)
+    link = models.TextField(null=True, blank=True)
+    slug = models.SlugField(max_length=100, unique=True)

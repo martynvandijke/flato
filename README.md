@@ -12,7 +12,10 @@ pass : testthis
 - [ ] chat/comment system
 - [ ] topics data api (movies,news,etc)
 - [X] rest api
-- [ ] new link generator
+- [X] new link generator
+
+todo:
+- Filter out already fetched news
 
 
 
