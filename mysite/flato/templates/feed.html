@@ -1,35 +1,34 @@
-
 {% extends 'base.html' %}
 
 {% block content %}
 
 
 <div class="container">
-  <div class="row">
-    <div class="col s12 cards-container">
+    <div class="row">
+        <div class="col s12 cards-container">
 
-      {% for news in news_list %}
+            {% for news in news_list %}
 
-        <div class="card hoverable verge">
-            <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src="{{news.image}}">
+            <div class="card hoverable verge">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="{{news.image}}">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">{{ news.title }}<i
+                            class="material-icons right">more_vert</i></span>
+                    <p><a href="{{news.slug}}">Go to post</a></p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">{{ news.title}}<i class="material-icons right">close</i></span>
+                    <p>{{ news.description}}</p>
+                </div>
             </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">{{ news.title }}<i class="material-icons right">more_vert</i></span>
-              <p><a href="{{news.slug}}">Go to post</a></p>
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4">{{ news.title}}<i class="material-icons right">close</i></span>
-              <p>{{ news.description}}</p>
-            </div>
+
+            {% endfor %}
+
+
         </div>
-
-      {% endfor %}
-
-
-
     </div>
-  </div>
 </div>
 
 

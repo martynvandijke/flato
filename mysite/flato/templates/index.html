@@ -1,193 +1,43 @@
+{% extends 'base.html' %}
 
+{% load static %}
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <!-- Google Analytics -->
-    <style>
+{% block content %}
 
-        body {
-          display: flex;
-          min-height: 100vh;
-          flex-direction: column;
-        }
-
-        main {
-          flex: 1 0 auto;
-        }
-    </style>
-    <!-- Font import -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import css-->
-    <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="static/css/grid.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="static/css/palette.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="static/css/emoji.css"  media="screen,projection"/>
-
-    <title>
-      Flato
-    </title>
-    <link rel="shortcut icon" href="static/images/icon/iconpng.ico" />
-    <!-- meta deta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
-  <body>
-    <nav>
-      <div class="nav-wrapper dark-primary-color">
-        <a href="#!" class="brand-logo center"><img height="50em" src="static/images/icon/iconpng.png"/></a>
-        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-        <div class="userinfo">
-          <div class="right-align">
-
-            <div class="right">
-              <div class="left">
-                <a class="modal-trigger" href="#account"><i class="material-icons">account_circle</i></a>
-              </div>
-              &nbsp; <a class="modal-trigger" href="#account">
-              {{ user_name }}
-              &nbsp;</a>
-              <div class="right">
-                <a class="modal-trigger" href="#settings"><i class="material-icons">settings</i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <ul class="right hide-on-med-and-down">
-           <li><a href="/logout">Logout</a></li>
-           <li><a class="modal-trigger" href="#account">Account</a></li>
-           <li><a class="modal-trigger" href="#settings">Settings</a></li>
-        </ul>
-
-        <ul class="side-nav" id="mobile-demo">
-           <li><a href="/logout">Logout</a></li>
-           <li><a class="modal-trigger" href="#account">Account</a></li>
-           <li><a class="modal-trigger" href="#settings">Settings</a></li>
-        </ul>
-        </div>
-    </nav>
-<!--Modal's -->
-
-
-
-<div id="settings" class="modal">
-  <div class="modal-content">
-    <h4 class="primary-text-color">Settings</h4>
-    <ul class="tabs">
-      <li class="tab col s4">
-        <a href="#tab1">General</a>
-      </li>
-      <li class="tab col s4">
-        <a href="#tab2">Show/hide card</a>
-      </li>
-      <li class="tab col s4">
-        <a href="#tab3">Wheater</a>
-      </li>
-    </ul>
-
-
-
-
-
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-  </div>
-</div>
-
-<div id="account" class="modal">
-  <div class="modal-content">
-    <h4 class="primary-text-color">Account settings</h4>
-    <div class="row">
-  <form class="col s12" action="/update" method="post">{% csrf_token %}
-    <div class="row">
-      <div class="input-field col s6">
-        <i class="material-icons prefix">account_circle</i>
-        <input placeholder="{{first_name}}" id="icon_prefix" name="firstname" type="text" class="validate">
-        <label for="icon_prefix">First Name</label>
-      </div>
-      <div class="input-field col s6">
-        <i class="material-icons prefix">account_circle</i>
-        <input placeholder="{{last_name}}" id="icon_prefix" name="lastname" type="text" class="validate">
-        <label for="icon_prefix">Last Name</label>
-      </div>
-      <div class="input-field col s12">
-            <i class="material-icons prefix">face</i>
-           <input placeholder="{{user_name}}" id="icon_prefix" name="username" type="text" class="validate">
-           <label for="icon_prefix">User name</label>
-        </div>
-    </div>
-    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-      <i class="material-icons right">send</i>
-    </button>
-  </form>
-</div>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col s12 cards-container">
-
-      {% for news in news_list %}
-
-        <div class="card hoverable verge">
-            <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src="{{news.image}}">
-            </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">{{ news.title }}<i class="material-icons right">more_vert</i></span>
-              <p><a href="{{news.slug}}">Go to post</a></p>
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4">{{ news.title}}<i class="material-icons right">close</i></span>
-              <p>{{ news.description}}</p>
-            </div>
-        </div>
-
-      {% endfor %}
-
-
-
-
-
-
-
-    </div>
-  </div>
-</div>
-<footer class="page-footer dark-primary-color">
-  <div class="container">
-    <div class="row">
-      <div class="col l6 s12">
-        <h5 class="white-text">Flato <img height="50em" src="static/images/icon/iconpng.png"/></h5>
-        <p class="grey-text text-lighten-4">Made for the 2ID60 Web technology course given on the TU/e</p>
-      </div>
-    </div>
-  </div>
-  <div class="footer-copyright">
+<div class="section no-pad-bot" id="index-banner">
     <div class="container">
-    © 2017 Copyright TU/e
-    <a class="grey-text text-lighten-4 right" href="https://www.tue.nl/">TU/e</a>
+        <h1 class="header center">Flato</h1>
+        <div class="row center">
+            <h4 class="header col s12 light center">A modern news site</h4>
+        </div>
+        <div class="row center">
+            <a href="/feed"
+               class="btn-large waves-effect waves-light">Take me there</a>
+        </div>
+        <br>
     </div>
+</div>
+
+  <div class="slider">
+    <ul class="slides">
+        {% for image in images %}
+
+
+      <li>
+        <img src="https://lorempixel.com/580/250/nature/1"> <!-- random image -->
+        <div class="caption center-align">
+          <h3>This is our big Tagline!</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+
+
+        {% endfor %}
+    </ul>
   </div>
-</footer>
-
-
-<!--Import js -->
-<script type="text/javascript" src="static/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="static/js/materialize.min.js"></script>
-<!--Material design -->
-<script type="text/javascript">
-  $(".button-collapse").sideNav();
-  $(document).ready(function(){
-    $('.modal').modal();
-  });
-
-  $('ul.tabs').tabs('select_tab', 'tab1');
-</script>
 
 
 
+
+
+{% endblock %}

@@ -85,6 +85,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
+TEMPLATE_DIRS = ('mysite/flato/templates', '/var/templates/mysite')
+
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases

@@ -29,9 +29,9 @@ router.register(r'data', DataViewSet)
 urlpatterns = [
     # url(r'^$', views.index, name='index'),
     url(r'^update/$', views.update, name='update'),
+    url(r'^$', views.index, name='index'),
     url(r'^feed/$', ListView.as_view(model=News, template_name='feed.html'), name='news_list'),
     url(r'^feed/(?P<slug>[-\w]+)$', views.NewsDetailView.as_view(), name='news'),
-
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'registration/logout.html'}, name='logout'),
     url(r'^', include(router.urls)),

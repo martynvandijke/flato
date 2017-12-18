@@ -16,16 +16,19 @@ class Profile(models.Model):
     wheater_dailyforecasts = models.TextField(null=True, blank=True)
     wheater_today = models.TextField(null=True, blank=True)
 
-
+## create extended user profile
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
+## save extended user profile
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+class Frontpage(models.Model):
+    image = models.TextField(null=True, blank=True)
 
 ## news model
 class News(models.Model):

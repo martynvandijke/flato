@@ -1,99 +1,37 @@
+{% extends 'base.html' %}
+
+
 {% load static %}
 
-<html>
-  <head>
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-34785646-3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-34785646-3');
-    </script>
 
-    <!-- Font import -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import css-->
-      <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
-      <link type="text/css" rel="stylesheet" href="{% static 'css/palette.css' %}"  media="screen,projection"/>
-      <link type="text/css" rel="stylesheet" href="{% static 'css/emoji.css' %}"  media="screen,projection"/>
+{% block content %}
 
-    <title>
-      Fireworder
-    </title>
-    <link rel="shortcut icon" href="{% static 'images/icon/iconpng.ico' %}" />
-    <!-- meta deta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<br>
+<br>
 
-  </head>
-      <style>
-      body {
-        display: flex;
-        min-height: 100vh;
-        flex-direction: column;
-      }
-
-      main {
-        flex: 1 0 auto;
-      }
-      </style>
-
-     <nav>
-      <div class="nav-wrapper dark-primary-color">
-        <a href="#!" class="brand-logo center"><img height="50em" src=" {% static 'images/icon/iconpng.png' %}"/></a>
-        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-          <!-- <li><a href="data.html">Charts</a></li> -->
-        </ul>
-
-        <ul class="side-nav" id="mobile-demo">
-          <!-- <li><a href="data.html">Charts</a></li> -->
-        </ul>
-        </div>
-    </nav>
-
-  <br>
-  <br>
-  <main>
 
 <div class="container">
     <center>
 
-    <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+        <div class="z-depth-1 grey lighten-4 row"
+             style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-        {% block content %}
-          <h2>Login</h2>
-          <h3>
-            Welcome back, we where missing you. <i class="em em-astonished"></i>
-          </h3>
-          <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn waves-effect waves-light" type="submit">Login</button>
-          </form>
-        {% endblock %}
-    <br>
-    </div>
+            <h2>Login</h2>
+            <h3>
+                Welcome back, we where missing you. <i class="em em-astonished"></i>
+            </h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn waves-effect waves-light" type="submit">Login</button>
+            </form>
+            <br>
+        </div>
 
     </center>
 </div>
-</main>
 
 
+{% endblock %}
 
-<footer class="page-footer dark-primary-color">
-  <div class="container">
-    <div class="row">
-      <div class="col l6 s12">
-        <h5 class="white-text">Fireworder <img height="50em" src="{% static 'images/icon/iconpng.png' %}"/></h5>
-        <p class="grey-text text-lighten-4">Made for the 2ID60 Web technology course given on the TU/e</p>
-      </div>
-    </div>
-  </div>
-  <div class="footer-copyright">
-    <div class="container">
-    © 2017 Copyright TU/e
-    <a class="grey-text text-lighten-4 right" href="https://www.tue.nl/">TU/e</a>
-    </div>
-  </div>
-</footer>
+

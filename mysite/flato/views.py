@@ -21,6 +21,7 @@ def index(request):
     if request.user.is_authenticated():
                 template = loader.get_template('index.html')
                 context = {
+                    'images' : "[test,fsdfseff]"
                 }
                 return HttpResponse(template.render(context, request))
 
