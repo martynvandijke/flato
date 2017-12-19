@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.template.defaultfilters import slugify
 from autoslug import AutoSlugField
 
 
@@ -35,8 +36,13 @@ class News(models.Model):
     source = models.TextField(null=True, blank=True)
     title = models.TextField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    date = models.TextField(null=True, blank=True)
+    date = models.DateField(null=True, blank=True)
+    time = models.TimeField(null=True, blank=True)
     author = models.TextField(null=True, blank=True)
     image = models.TextField(null=True, blank=True)
     link = models.TextField(null=True, blank=True)
-    slug = models.SlugField(max_length=100, unique=True)
+    slug = AutoSlugField(populate_from='title')
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title) # set the slug explicitly
+        super(News, self).save(*args, **kwargs) # call Django's save()

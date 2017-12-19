@@ -7,16 +7,19 @@ pass : testthis
 
 
 # To do list :
-- [ ] frontpage with apis
-- [x] account login
+- [ ] frontpage dashboard with apis
 - [ ] chat/comment system
-- [ ] topics data api (movies,news,etc)
+- [ ] User history -> notifications from threads 
+- [ ] Create account 
+- [ ] Performance lookup large database  
+- [ ] topics data api (movies,news,etc) -> 
 - [X] rest api
+- [x] account login
 - [X] new link generator
 
 todo:
 - Filter out already fetched news
-
+- Automatic fetch news
 
 
 funnky ideas (extra)
@@ -27,6 +30,6 @@ playable games
 
 downloadable data dribble
 
-Searh topic
+Search topic
 
 Set date interval

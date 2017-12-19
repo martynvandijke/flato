@@ -2,8 +2,7 @@ import json, requests
 from .models import News
 
 
-
-def news():
+def BBCnews():
         url = 'https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=25a3dde52adb4c128205ac244ee5d750'
         resp = requests.get(url=url)
         data = json.loads(resp.text)
@@ -15,16 +14,20 @@ def news():
                 description = article['description']
                 url = article['url']
                 image = article['urlToImage']
-                date = article["publishedAt"]
-
+                dateFull = article["publishedAt"]
+                temp = dateFull.split('T')
+                date = temp[0]
+                time = temp[1].split("Z")
+                time = time[0]
                 News.objects.create(
-                        news_source = source,
-                        news_title = title,
-                        news_description = description,
-                        news_date = date,
-                        news_author = author,
-                        news_image = image,
-                        news_link = url,
+                        source=source,
+                        title=title,
+                        description=description,
+                        date=date,
+                        time=time,
+                        author=author,
+                        image=image,
+                        link=url,
                 )
 
-news()
+
