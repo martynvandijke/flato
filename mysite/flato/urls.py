@@ -27,11 +27,12 @@ router.register(r'data', DataViewSet)
 
 
 urlpatterns = [
-    # url(r'^$', views.index, name='index'),
     url(r'^update/$', views.update, name='update'),
     url(r'^$', views.index, name='index'),
-    url(r'^feed/$', views.NewsListView.as_view(), name='news_list'),
-    url(r'^feed/(?P<slug>[-\w]+)$', views.NewsDetailView.as_view(), name='news'),
+    url(r'^feed/$', views.MultipleModelView.as_view(), name='news_list'),
+    url(r'^feed/news/(?P<slug>[-\w]+)$', views.NewsDetailView.as_view(), name='news'),
+    url(r'^feed/movie/(?P<slug>[-\w]+)$', views.MovieDetailView.as_view(), name='movie'),
+
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'registration/logout.html'}, name='logout'),
     url(r'^', include(router.urls)),

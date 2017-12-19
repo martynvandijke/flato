@@ -3,24 +3,33 @@
 {% block content %}
 
 
+
+<div class="container">
+    <div class="card">
+        <div class="container center">
+        <h1>General news</h1>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col s12 cards-container">
 
-            {% for news in news_list %}
+            {% for object in newslist %}
 
             <div class="card hoverable verge">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="{{news.image}}">
+                    <img class="activator" src="{{object.image}}">
                 </div>
                 <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">{{ news.title }}<i
+                    <span class="card-title activator grey-text text-darken-4">{{ object.title }}<i
                             class="material-icons right">more_vert</i></span>
-                    <p><a href="{{news.slug}}">Go to post</a></p>
+                    <p><a class="waves-effect waves-light btn" href="news/{{object.slug}}">Go to post</a></p>
                 </div>
                 <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">{{ news.title}}<i class="material-icons right">close</i></span>
-                    <p>{{ news.description}}</p>
+                    <span class="card-title grey-text text-darken-4">{{ object.title}}<i class="material-icons right">close</i></span>
+                    <p>{{ object.description}}</p>
                 </div>
             </div>
 
@@ -30,6 +39,45 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="container">
+    <div class="card">
+        <div class="container center">
+        <h1>Movies</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 cards-container">
+
+            {% for object in movielist %}
+
+            <div class="card hoverable verge">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="http://image.tmdb.org/t/p/w780/{{object.poster_path}}">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">{{ object.title }}<i
+                            class="material-icons right">more_vert</i></span>
+                    <p><a class="waves-effect waves-light btn" href="movie/{{object.slug}}">Go to post</a></p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">{{ object.title}}<i class="material-icons right">close</i></span>
+                    <p>{{ object.overview }}</p>
+                </div>
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+    </div>
+</div>
+
 
 
 {% endblock %}

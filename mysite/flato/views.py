@@ -4,19 +4,29 @@ from django.contrib.auth.models import User
 import json, requests
 from django.template import loader
 from django.shortcuts import redirect
-from .models import News
-from django.views.generic import ListView, DetailView
-from .scraper import BBCnews
+from .models import News, Movie
+from django.views.generic import ListView, DetailView, TemplateView
+from .scraper import GeneralNews, Movies
+from time import  timezone
 
-class NewsListView(ListView):
-    model = News
-    queryset = News.objects.order_by("-date")[:9]
-
+class MultipleModelView(TemplateView):
     template_name = 'feed.html'
+    def get_context_data(self, **kwargs):
+        context = super(MultipleModelView, self).get_context_data(**kwargs)
+        context['newslist'] = News.objects.filter(tag="general").order_by("-date")[:9]
+        context['movielist'] = Movie.objects.all().order_by("-popularity")[:9]
+
+        return context
+
 
 class NewsDetailView(DetailView):
     model = News
     template_name = 'news.html'
+
+class MovieDetailView(DetailView):
+    model = Movie
+    template_name = 'movie.html'
+
 
 def index(request):
 
@@ -31,11 +41,16 @@ def index(request):
         return redirect('/login/')
 
 def update(request):
-    BBCnews()
 
-    # try:
-    #     BBCnews()
-    # except:
-    #     print("BBC News Error")
+    try:
+        GeneralNews()
+    except:
+        print("BBC News Error")
 
-    return HttpResponse("updated BBCnews")
+    try:
+        Movies()
+    except:
+        print("error")
+
+
+    return HttpResponse("updated BBCnews and Movies ")

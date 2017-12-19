@@ -41,8 +41,25 @@ class News(models.Model):
     author = models.TextField(null=True, blank=True)
     image = models.TextField(null=True, blank=True)
     link = models.TextField(null=True, blank=True)
-    slug = AutoSlugField(populate_from='title')
+    tag = models.TextField(null=True, blank=True)
+    slug = AutoSlugField(populate_from='title',unique=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title) # set the slug explicitly
         super(News, self).save(*args, **kwargs) # call Django's save()
+
+class Movie(models.Model):
+    title = models.TextField(null=True, blank=True)
+    vote_count = models.TextField(null=True, blank=True)
+    vote_average = models.TextField(null=True, blank=True)
+    poster_path = models.TextField(null=True, blank=True)
+    gerne_ids = models.TextField(null=True, blank=True)
+    backdrop_path = models.TextField(null=True, blank=True)
+    overview = models.TextField(null=True, blank=True)
+    popularity = models.TextField(null=True, blank=True)
+    date = models.DateField(null=True, blank=True)
+    slug = AutoSlugField(populate_from='title',unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title) # set the slug explicitly
+        super(Movie, self).save(*args, **kwargs) # call Django's save()

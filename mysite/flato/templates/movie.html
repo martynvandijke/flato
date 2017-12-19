@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="card">
+        <div class="card-image">
+            <img src="http://image.tmdb.org/t/p/original/{{movie.backdrop_path}}">
+            <span class="card-title">{{movie.title}}</span>
+        </div>
+        <div class="card-content">
+            <p>
+                {{movie.overview}}
+            </p>
+            {{ movie.vote_count }}
+            {{ movie.vote_average }}
+            {{ movie.date }}
+        </div>
+
+
+    </div>
+</div>
+
+
+{% endblock %}
