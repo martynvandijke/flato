@@ -6,15 +6,15 @@ from django.template import loader
 from django.shortcuts import redirect
 from .models import News, Movie
 from django.views.generic import ListView, DetailView, TemplateView
-from .scraper import GeneralNews, Movies
+from .scraper import GeneralNews, Movies, TechNews, ScienceNews, BusinessNews
 from time import  timezone
 
 class MultipleModelView(TemplateView):
     template_name = 'feed.html'
     def get_context_data(self, **kwargs):
         context = super(MultipleModelView, self).get_context_data(**kwargs)
-        context['newslist'] = News.objects.filter(tag="general").order_by("-date")[:9]
-        context['movielist'] = Movie.objects.all().order_by("-popularity")[:9]
+        context['newslist'] = News.objects.filter().order_by("-date")[:10]
+        # context['movielist'] = Movie.objects.all().order_by("-popularity")[:9]
 
         return context
 
@@ -51,6 +51,8 @@ def update(request):
         Movies()
     except:
         print("error")
-
+    BusinessNews()
+    TechNews()
+    ScienceNews()
 
     return HttpResponse("updated BBCnews and Movies ")

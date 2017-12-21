@@ -25,7 +25,19 @@
     <link type="text/css" rel="stylesheet" href="{% static 'css/grid.css' %}" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="{% static 'css/palette.css' %}" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="{% static 'css/emoji.css' %}" media="screen,projection"/>
+<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+<!--Material design -->
+<!--<script type="text/javascript">-->
+  <!--&lt;!&ndash;$(".button-collapse").sideNav();&ndash;&gt;-->
+  <!--&lt;!&ndash;$(document).ready(function(){&ndash;&gt;-->
+    <!--&lt;!&ndash;$('.modal').modal();&ndash;&gt;-->
+  <!--&lt;!&ndash;});&ndash;&gt;-->
+  <!--&lt;!&ndash;$('.slider').slider();&ndash;&gt;-->
 
+  <!--&lt;!&ndash;$('ul.tabs').tabs('select_tab', 'tab1');&ndash;&gt;-->
+
+<!--</script>-->
     <title>
         Flato
     </title>
@@ -149,22 +161,54 @@
         </div>
     </div>
 </footer>
+<script>
+    console.log("feed");
+
+</script>
+
+<script>
+console.log("feed2");
+$( document ).ready(function() {
+console.log("feed");
+
+});
+$('.chips').material_chip();
+  $('.chips-initial').material_chip({
+    data: [{
+      tag: 'General',
+    }, {
+      tag: 'Technology',
+    }, {
+      tag: 'Google',
+    }],
+  });
+  $('.chips-placeholder').material_chip({
+    placeholder: 'Enter a tag',
+    secondaryPlaceholder: '+Tag',
+  });
+  $('.chips-autocomplete').material_chip({
+    autocompleteOptions: {
+      data: {
+        'General': null,
+        'Technology': null,
+        'Google': null
+      },
+      limit: Infinity,
+      minLength: 1
+    }
+  });
+
+  $('.chips-initial').material_chip('data');
+
+   $('.chips').on('chip.delete', function(e, chip){
+    console.log("test");
+  });
+
+</script>
 
 
 <!--Import js -->
-<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
-<!--Material design -->
-<script type="text/javascript">
-  $(".button-collapse").sideNav();
-  $(document).ready(function(){
-    $('.modal').modal();
-  });
-  $('.slider').slider();
 
-  $('ul.tabs').tabs('select_tab', 'tab1');
-
-</script>
 
 </body>
 </html>

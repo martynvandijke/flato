@@ -3,7 +3,7 @@ from .models import News, Movie
 
 
 def GeneralNews():
-        url = 'https://newsapi.org/v2/top-headlines?sources=bbc-news,bbc-news&apiKey=25a3dde52adb4c128205ac244ee5d750'
+        url = 'https://newsapi.org/v2/top-headlines?sources=bbc-news,google-news,reuters,reddit-r-all,rtl-nieuws,the-telegraph&apiKey=25a3dde52adb4c128205ac244ee5d750'
         resp = requests.get(url=url)
         data = json.loads(resp.text)
         articles = data['articles']
@@ -30,6 +30,127 @@ def GeneralNews():
                         link=url,
                         tag="general"
                 )
+
+
+def TechNews():
+        url = 'https://newsapi.org/v2/top-headlines?sources=crypto-coins-news,the-verge,wired&apiKey=25a3dde52adb4c128205ac244ee5d750'
+        resp = requests.get(url=url)
+        data = json.loads(resp.text)
+        articles = data['articles']
+        for article in articles:
+                source = article['source']['name']
+                author = article['author']
+                title = article['title']
+                description = article['description']
+                url = article['url']
+                image = article['urlToImage']
+                dateFull = article["publishedAt"]
+                temp = dateFull.split('T')
+                date = temp[0]
+                time = temp[1].split("Z")
+                time = time[0]
+                News.objects.create(
+                        source=source,
+                        title=title,
+                        description=description,
+                        date=date,
+                        time=time,
+                        author=author,
+                        image=image,
+                        link=url,
+                        tag="technology"
+                )
+
+
+def ScienceNews():
+        url = 'https://newsapi.org/v2/top-headlines?sources=new-scientist,national-geographic&apiKey=25a3dde52adb4c128205ac244ee5d750'
+        resp = requests.get(url=url)
+        data = json.loads(resp.text)
+        articles = data['articles']
+        for article in articles:
+                source = article['source']['name']
+                author = article['author']
+                title = article['title']
+                description = article['description']
+                url = article['url']
+                image = article['urlToImage']
+                dateFull = article["publishedAt"]
+                temp = dateFull.split('T')
+                date = temp[0]
+                time = temp[1].split("Z")
+                time = time[0]
+                News.objects.create(
+                        source=source,
+                        title=title,
+                        description=description,
+                        date=date,
+                        time=time,
+                        author=author,
+                        image=image,
+                        link=url,
+                        tag="science and nature"
+                )
+
+
+def BusinessNews():
+        url = 'https://newsapi.org/v2/top-headlines?sources=bloomberg,cnbc,business-insider-uk,cbs-news&apiKey=25a3dde52adb4c128205ac244ee5d750'
+        resp = requests.get(url=url)
+        data = json.loads(resp.text)
+        articles = data['articles']
+        for article in articles:
+                source = article['source']['name']
+                author = article['author']
+                title = article['title']
+                description = article['description']
+                url = article['url']
+                image = article['urlToImage']
+                dateFull = article["publishedAt"]
+                temp = dateFull.split('T')
+                date = temp[0]
+                time = temp[1].split("Z")
+                time = time[0]
+                News.objects.create(
+                        source=source,
+                        title=title,
+                        description=description,
+                        date=date,
+                        time=time,
+                        author=author,
+                        image=image,
+                        link=url,
+                        tag="business"
+                )
+
+
+# def BusinessNews():
+#         url = 'https://newsapi.org/v2/top-headlines?sources=bloomberg,cnbc,business-insider-uk,cbs-news&apiKey=25a3dde52adb4c128205ac244ee5d750'
+#         resp = requests.get(url=url)
+#         data = json.loads(resp.text)
+#         articles = data['articles']
+#         for article in articles:
+#                 source = article['source']['name']
+#                 author = article['author']
+#                 title = article['title']
+#                 description = article['description']
+#                 url = article['url']
+#                 image = article['urlToImage']
+#                 dateFull = article["publishedAt"]
+#                 temp = dateFull.split('T')
+#                 date = temp[0]
+#                 time = temp[1].split("Z")
+#                 time = time[0]
+#                 News.objects.create(
+#                         source=source,
+#                         title=title,
+#                         description=description,
+#                         date=date,
+#                         time=time,
+#                         author=author,
+#                         image=image,
+#                         link=url,
+#                         tag="business"
+#                 )
+
 def Movies():
         url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=d1eb6d004d748e1f86bbbc2ce791b43d'
         resp = requests.get(url=url)
