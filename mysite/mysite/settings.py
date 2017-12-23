@@ -31,6 +31,8 @@ ALLOWED_HOSTS = [
     '2id60.win.tue.nl',
     'flato.vandijke.xyz',
     '10.0.3.172',
+    'martynvandijke.nl',
+    '10.0.3.20',
 ]
 
 
