@@ -17,6 +17,7 @@
           flex: 1 0 auto;
         }
 
+
     </style>
     <!-- Font import -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -25,19 +26,8 @@
     <link type="text/css" rel="stylesheet" href="{% static 'css/grid.css' %}" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="{% static 'css/palette.css' %}" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="{% static 'css/emoji.css' %}" media="screen,projection"/>
-<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
-<!--Material design -->
-<!--<script type="text/javascript">-->
-  <!--&lt;!&ndash;$(".button-collapse").sideNav();&ndash;&gt;-->
-  <!--&lt;!&ndash;$(document).ready(function(){&ndash;&gt;-->
-    <!--&lt;!&ndash;$('.modal').modal();&ndash;&gt;-->
-  <!--&lt;!&ndash;});&ndash;&gt;-->
-  <!--&lt;!&ndash;$('.slider').slider();&ndash;&gt;-->
 
-  <!--&lt;!&ndash;$('ul.tabs').tabs('select_tab', 'tab1');&ndash;&gt;-->
 
-<!--</script>-->
     <title>
         Flato
     </title>
@@ -141,8 +131,8 @@
 </div>
 
 <main>
-{% block content %}
-{% endblock %}
+    {% block content %}
+    {% endblock %}
 </main>
 
 <footer class="page-footer dark-primary-color">
@@ -161,50 +151,108 @@
         </div>
     </div>
 </footer>
-<script>
-    console.log("feed");
 
-</script>
+<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
 
 <script>
-console.log("feed2");
+
 $( document ).ready(function() {
-console.log("feed");
+    $(".button-collapse").sideNav();
+    $('.modal').modal();
 
-});
-$('.chips').material_chip();
+
+  $('.chips').material_chip();
+   $('.chips').on('chip.delete', function(e, chip){
+    console.log(chip);
+        $.ajax({
+        url: '/deletechip',
+        data: {
+          'chip': chip['tag']
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("error");
+          }
+        }
+      });
+
+  });
+
+   $('.chips').on('chip.add', function(e, chip){
+    console.log(chip);
+        $.ajax({
+        url: '/addchip',
+        data: {
+          'chip': chip['tag']
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("error");
+          }
+        }
+      });
+  });
+
   $('.chips-initial').material_chip({
-    data: [{
+    data: [
+    {% if general == "True" %}
+    {
       tag: 'General',
-    }, {
+    },
+    {% endif %}
+    {% if technology == "True" %}
+    {
       tag: 'Technology',
-    }, {
-      tag: 'Google',
-    }],
-  });
-  $('.chips-placeholder').material_chip({
-    placeholder: 'Enter a tag',
-    secondaryPlaceholder: '+Tag',
-  });
-  $('.chips-autocomplete').material_chip({
+    },
+    {% endif %}
+    {% if business == "True" %}
+    {
+      tag: 'Business',
+    },
+    {% endif %}
+    {% if gaming == "True" %}
+    {
+      tag: 'Gaming',
+    },
+    {% endif %}
+    {% if sport == "True" %}
+    {
+      tag: 'Sport',
+    },
+    {% endif %}
+    {% if politics == "True" %}
+    {
+      tag: 'Politics',
+    }
+    {% endif %}
+    ],
     autocompleteOptions: {
       data: {
         'General': null,
         'Technology': null,
-        'Google': null
+        'Business': null,
+        'Sport': null,
+        'Gaming': null,
+        'Politics': null,
       },
       limit: Infinity,
       minLength: 1
     }
   });
 
-  $('.chips-initial').material_chip('data');
 
-   $('.chips').on('chip.delete', function(e, chip){
-    console.log("test");
-  });
+
+
+});
+
+
 
 </script>
+
+
 
 
 <!--Import js -->

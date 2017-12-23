@@ -11,8 +11,8 @@ pass : testthis
 - [ ] chat/comment system
 - [ ] User history -> notifications from threads 
 - [ ] Create account 
-- [ ] Performance lookup large database  
 - [ ] topics data api (movies,news,etc) -> 
+- [X] Performance lookup large database  postgress has very very good performance 
 - [X] rest api
 - [x] account login
 - [X] new link generator

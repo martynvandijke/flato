@@ -32,6 +32,8 @@ urlpatterns = [
     url(r'^feed/$', views.MultipleModelView.as_view(), name='news_list'),
     url(r'^feed/news/(?P<slug>[-\w]+)$', views.NewsDetailView.as_view(), name='news'),
     url(r'^feed/movie/(?P<slug>[-\w]+)$', views.MovieDetailView.as_view(), name='movie'),
+    url(r'^deletechip/$', views.deletechip, name='deletechip'),
+    url(r'^addchip/$', views.addchip, name='addchip'),
 
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'registration/logout.html'}, name='logout'),

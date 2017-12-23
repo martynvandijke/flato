@@ -9,13 +9,21 @@ from autoslug import AutoSlugField
 ##store data wich belongs to the user itself
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    wheater_city = models.CharField(max_length=200,default="Eindhoven")
-    wheater_degree = models.CharField(max_length=10,default="celsius")
+    wheater_city = models.CharField(max_length=200, default="Eindhoven")
+    wheater_degree = models.CharField(max_length=10, default="celsius")
     wheater_citykey = models.TextField(null=True, blank=True)
     wheater_country = models.TextField(null=True, blank=True)
     wheater_province = models.TextField(null=True, blank=True)
     wheater_dailyforecasts = models.TextField(null=True, blank=True)
     wheater_today = models.TextField(null=True, blank=True)
+    chip_general = models.TextField(null=True, blank=True, default="True")
+    chip_sport = models.TextField(null=True, blank=True, default="True")
+    chip_business = models.TextField(null=True, blank=True, default="True")
+    chip_technology = models.TextField(null=True, blank=True, default="True")
+    chip_politics = models.TextField(null=True, blank=True, default="True")
+    chip_gaming = models.TextField(null=True, blank=True, default="True")
+
+
 
 ## create extended user profile
 @receiver(post_save, sender=User)
@@ -23,13 +31,16 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
+
 ## save extended user profile
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+
 class Frontpage(models.Model):
     image = models.TextField(null=True, blank=True)
+
 
 ## news model
 class News(models.Model):
@@ -42,11 +53,12 @@ class News(models.Model):
     image = models.TextField(null=True, blank=True)
     link = models.TextField(null=True, blank=True)
     tag = models.TextField(null=True, blank=True)
-    slug = AutoSlugField(populate_from='title',unique=True)
+    slug = AutoSlugField(populate_from='title', unique=True)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title) # set the slug explicitly
-        super(News, self).save(*args, **kwargs) # call Django's save()
+        self.slug = slugify(self.title)  # set the slug explicitly
+        super(News, self).save(*args, **kwargs)  # call Django's save()
+
 
 class Movie(models.Model):
     title = models.TextField(null=True, blank=True)
@@ -58,8 +70,8 @@ class Movie(models.Model):
     overview = models.TextField(null=True, blank=True)
     popularity = models.TextField(null=True, blank=True)
     date = models.DateField(null=True, blank=True)
-    slug = AutoSlugField(populate_from='title',unique=True)
+    slug = AutoSlugField(populate_from='title', unique=True)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title) # set the slug explicitly
-        super(Movie, self).save(*args, **kwargs) # call Django's save()
+        self.slug = slugify(self.title)  # set the slug explicitly
+        super(Movie, self).save(*args, **kwargs)  # call Django's save()

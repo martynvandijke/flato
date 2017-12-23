@@ -7,20 +7,21 @@
     <div class="card">
         <div class="container">
             <br> <br>
-           <p class="caption">Choose what to display</p>
+            <p class="caption">Choose topics to display</p>
 
-            <div class="chips chips-initial">
-                <div class="chip">General<i class="material-icons close">close</i></div>
-                <div class="chip">Technology<i class="material-icons close">close</i></div>
-                <div class="chip">Science and nature<i class="material-icons close">close</i></div>
-                <div class="chip">Business<i class="material-icons close">close</i></div>
-                <input id="6a2758cb-13c9-9ed8-44c7-60ced1122181" class="input" placeholder=""></div>
-
-    <br> <br>
+            <div class="chips  chips-autocomplete chips-initial">
+            </div>
+            <br>
+            Number of news items to display
+              <form action="#">
+                <p class="range-field">
+                  <input type="range" id="newsnumber" min="10" max="100" />
+                </p>
+              </form>
+            <br>
         </div>
-  </div>
+    </div>
 </div>
-
 
 <div class="container">
     <div class="row">
@@ -97,45 +98,6 @@
     </div>
 </div>
 
-<script>
-console.log("feed2");
-$( document ).ready(function() {
-console.log("feed");
-
-});
-$('.chips').material_chip();
-  $('.chips-initial').material_chip({
-    data: [{
-      tag: 'General',
-    }, {
-      tag: 'Technology',
-    }, {
-      tag: 'Google',
-    }],
-  });
-  $('.chips-placeholder').material_chip({
-    placeholder: 'Enter a tag',
-    secondaryPlaceholder: '+Tag',
-  });
-  $('.chips-autocomplete').material_chip({
-    autocompleteOptions: {
-      data: {
-        'General': null,
-        'Technology': null,
-        'Google': null
-      },
-      limit: Infinity,
-      minLength: 1
-    }
-  });
-
-  $('.chips-initial').material_chip('data');
-
-   $('.chips').on('chip.delete', function(e, chip){
-    console.log("test");
-  });
-
-</script>
 
 {% endif %}
 
