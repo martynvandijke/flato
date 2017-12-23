@@ -28,7 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-'2id60.win.tue.nl'
+    '2id60.win.tue.nl',
+    'flato.vandijke.xyz',
+    '10.0.3.172',
 ]
 
 
