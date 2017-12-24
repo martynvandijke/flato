@@ -7,17 +7,48 @@
     <div class="card">
         <div class="container">
             <br> <br>
-            <p class="caption">Choose topics to display</p>
 
+            <p class="caption">Choose topics to display </p>
             <div class="chips  chips-autocomplete chips-initial">
             </div>
+            <blockquote>
+                Topics to choose from are <br>
+                General, Business, Politics, Sport, Gaming, Technology
+            </blockquote>
             <br>
-            Number of news items to display
-              <form action="#">
+            <form action="search/" method="post">{% csrf_token %}
+                Number of news items to display
                 <p class="range-field">
-                  <input type="range" id="newsnumber" min="10" max="100" />
+                    <input type="range" id="newsnumber" name="newsnumber" min="1" max="100"/>
                 </p>
-              </form>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Blockchain" id="title" name="title" type="text" class="validate">
+                        <label for="title">Title must contain</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input placeholder="John Doe" id="author" name="author" type="text" class="validate">
+                        <label for="author">Author name must contain</label>
+                    </div>
+                    <div class="input-field col s6 ">
+                    <textarea placeholder="Blockchain bitcoin value" name="description" id="description"
+                              class="materialize-textarea"
+                              class="validate"></textarea>
+                        <label for="description">Description must contain</label>
+                    </div>
+                    <div class="col s6">
+                        <input type="text" name="time" placeholder="Limit time" class="timepicker">
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="material-icons right">keyboard_arrow_right</i>
+                </button>
+            </form>
+            <form action="clear/" method="post">{% csrf_token %}
+                <button class="btn waves-effect waves-light" type="submit" name="action">Clear
+                    <i class="material-icons right">keyboard_arrow_right</i>
+                </button>
+            </form>
             <br>
         </div>
     </div>
