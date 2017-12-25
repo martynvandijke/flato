@@ -152,6 +152,8 @@
     </div>
 </footer>
 
+
+
 <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
 
@@ -164,9 +166,8 @@ $( document ).ready(function() {
 
   $('.chips').material_chip();
    $('.chips').on('chip.delete', function(e, chip){
-    console.log(chip);
         $.ajax({
-        url: '/deletechip',
+        url: 'deletechip',
         data: {
           'chip': chip['tag']
         },
@@ -174,6 +175,7 @@ $( document ).ready(function() {
         success: function (data) {
           if (data.is_taken) {
             alert("error");
+            console.log("test");
           }
         }
       });
@@ -181,9 +183,8 @@ $( document ).ready(function() {
   });
 
    $('.chips').on('chip.add', function(e, chip){
-    console.log(chip);
         $.ajax({
-        url: '/addchip',
+        url: 'addchip',
         data: {
           'chip': chip['tag']
         },

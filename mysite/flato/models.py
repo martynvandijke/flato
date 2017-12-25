@@ -22,7 +22,7 @@ class Profile(models.Model):
     chip_technology = models.TextField(null=True, blank=True, default="True")
     chip_politics = models.TextField(null=True, blank=True, default="True")
     chip_gaming = models.TextField(null=True, blank=True, default="True")
-
+    numberofitems = models. IntegerField(null=True, blank=True, default=15)
 
 
 ## create extended user profile

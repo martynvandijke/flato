@@ -9,10 +9,16 @@ from django.views.generic import ListView, DetailView, TemplateView
 from .scraper import GeneralNews, Movies, TechNews, ScienceNews, BusinessNews, GamingNews, SportNews , PoliticalNews
 from django.db.models import Q
 
+
+'''
+Main view for the /feed
+'''
 class MultipleModelView(TemplateView):
     template_name = 'feed.html'
 
     def get_context_data(self, **kwargs):
+
+
         context = super(MultipleModelView, self).get_context_data(**kwargs)
         general = self.request.user.profile.chip_general
         business = self.request.user.profile.chip_business
@@ -29,67 +35,61 @@ class MultipleModelView(TemplateView):
         Qtechnology = Q()
         Qtitle = Q()
         Qauthor = Q()
-        Qnewsnumber = 10
+
         Qdescription = Q()
         Qtime = Q()
-        if self.request.session['newsnumber']:
+        try:
             Qnewsnumber = self.request.session['newsnumber']
-        else:
-            Qnewsnumber = 20
+        except:
+            Qnewsnumber = 15
 
-        if self.request.session['title']:
-            Qtitle = Q(title=str(self.request.session['title']))
-            print(Qtitle)
+        try:
+            Qtitle = Q(title__contains=str(self.request.session['title']))
+        except:
+            Qtitle = Q()
 
-        if self.request.session['description']:
-            Qdescription = Q(description=self.request.session['description'])
+        try:
+            Qdescription = Q(description__contains=self.request.session['description'])
+        except:
+            Qdescription = Q()
 
-        if self.request.session['author']:
-            Qauthor = Q(author=self.request.session['author'] )
+        try:
+            Qauthor = Q(author__contains=self.request.session['author'] )
+        except:
+            Qauthor = Q()
 
-        if self.request.session['time']:
+        try:
             Qtime = Q(time=self.request.session['time'])
-
+        except:
+            Qtime = Q()
 
         if general == "True":
             Qgeneral = Q(tag="General")
-            print("gen")
         if business == "True":
             Qbusiness = Q(tag="Business")
-            print("bus")
         if politics == "True":
             Qpolitics = Q(tag="Politics")
-            print("poli")
         if sport == "True":
             Qsport = Q(tag="Sport")
-            print("sport")
         if gaming == "True":
             Qgaming = Q(tag="Gaming")
-            print("gaming")
         if technology == "True":
             Qtechnology = Q(tag="Technology ")
-            print("tec")
-        print(        Qgeneral,
-        Qbusiness,
-        Qpolitics,
-        Qsport,
-        Qgaming,
-        Qtechnology,
-        Qtitle,
-)
+
+
+
         context['newslist'] = News.objects.filter(
-
-        Qgeneral|
-        Qbusiness|
-        Qpolitics|
-        Qsport|
-        Qgaming|
-        Qtechnology|
-        Qtitle
-
-
+            (Qgeneral|
+            Qbusiness|
+            Qpolitics|
+            Qsport|
+            Qgaming|
+            Qtechnology)&
+            Qtitle&
+            Qdescription&
+            Qauthor
         ).order_by("-date")[:int(Qnewsnumber)]
-        # context['movielist'] = Movie.objects.all().order_by("-popularity")[:9]
+
         context['general'] = self.request.user.profile.chip_general
         context['business'] = self.request.user.profile.chip_business
         context['politics'] = self.request.user.profile.chip_politics
@@ -107,7 +107,11 @@ class MovieDetailView(DetailView):
     model = Movie
     template_name = 'movie.html'
 
+'''
+Handle adding a chip
+'''
 def addchip(request):
+    if request.method == 'GET':
         user = User.objects.get(pk=request.user.id)
         data = request.GET.get('chip', None)
         if data.lower() == "general":
@@ -122,12 +126,15 @@ def addchip(request):
             user.profile.chip_gaming = "True"
         if data.lower() == "technology":
             user.profile.chip_technology = "True"
-
         user.save()
-        print("adding")
-        return redirect('/feed', permanent=True)
+        return redirect('/feedupdate', permanent=True)
 
+
+'''
+Handle deleting a chip
+'''
 def deletechip(request):
+    if request.method == 'GET':
         user = User.objects.get(pk=request.user.id)
         data = request.GET.get('chip', None)
         if data.lower() == "general":
@@ -144,10 +151,13 @@ def deletechip(request):
             user.profile.chip_technology = "False"
 
         user.save()
-        print("tesdsfsd")
-        return redirect('/feed', permanent=True)
+        return redirect('/feed')
 
+    return HttpResponse("test")
 
+'''
+Handle search function
+'''
 def search(request):
     if request.method == 'POST':
         newsnumber = request.POST.get("newsnumber")
@@ -160,11 +170,20 @@ def search(request):
         request.session['description'] = description
         request.session['author'] = author
         request.session['time'] = time
-
-        print(newsnumber,title, description, author, time)
         return redirect ('/feed')
 
 
+'''
+Handle clearing the search function
+'''
+def clear(request):
+    if request.method == 'POST':
+        del request.session['newsnumber']
+        del request.session['title']
+        del request.session['description']
+        del request.session['author']
+        del request.session['time']
+        return redirect ('/feed')
 
 def index(request):
 
@@ -196,4 +215,4 @@ def update(request):
     SportNews()
     PoliticalNews()
 
-    return HttpResponse("updated BBCnews and Movies ")
+    return HttpResponse("updated database ")

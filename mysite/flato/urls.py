@@ -30,11 +30,14 @@ urlpatterns = [
     url(r'^update/$', views.update, name='update'),
     url(r'^$', views.index, name='index'),
     url(r'^feed/$', views.MultipleModelView.as_view(), name='news_list'),
+    # url(r'^feedupdate/$', views.MultipleModelView.as_view(), name='news_list'),
+
     url(r'^feed/news/(?P<slug>[-\w]+)$', views.NewsDetailView.as_view(), name='news'),
-    url(r'^feed/movie/(?P<slug>[-\w]+)$', views.MovieDetailView.as_view(), name='movie'),
-    url(r'^deletechip/$', views.deletechip, name='deletechip'),
-    url(r'^addchip/$', views.addchip, name='addchip'),
-    url(r'^feed/search/$', views.search, name='addchip'),
+    # url(r'^feed/movie/(?P<slug>[-\w]+)$', views.MovieDetailView.as_view(), name='movie'),
+    url(r'^feed/deletechip$', views.deletechip, name='deletechip'),
+    url(r'^feed/addchip$', views.addchip, name='addchip'),
+    url(r'^feed/search/$', views.search, name='search'),
+    url(r'^feed/clear/$', views.clear, name='clear'),
 
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'registration/logout.html'}, name='logout'),

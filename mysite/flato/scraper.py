@@ -1,4 +1,4 @@
-import json, requests
+import json, requests, datetime
 from .models import News, Movie
 
 
@@ -135,10 +135,14 @@ def PoliticalNews():
                 url = article['url']
                 image = article['urlToImage']
                 dateFull = article["publishedAt"]
-                temp = dateFull.split('T')
-                date = temp[0]
-                time = temp[1].split("Z")
-                time = time[0]
+                try:
+                        temp = dateFull.split('T')
+                        date = temp[0]
+                        time = temp[1].split("Z")
+                        time = time[0]
+                except:
+                        time=datetime.datetime.now().time()
+                        date=datetime.datetime.now()
                 News.objects.create(
                         source=source,
                         title=title,
@@ -165,10 +169,14 @@ def SportNews():
                 url = article['url']
                 image = article['urlToImage']
                 dateFull = article["publishedAt"]
-                temp = dateFull.split('T')
-                date = temp[0]
-                time = temp[1].split("Z")
-                time = time[0]
+                try:
+                        temp = dateFull.split('T')
+                        date = temp[0]
+                        time = temp[1].split("Z")
+                        time = time[0]
+                except:
+                        time=datetime.datetime.now().time()
+                        date=datetime.datetime.now()
                 News.objects.create(
                         source=source,
                         title=title,
