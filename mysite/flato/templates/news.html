@@ -21,33 +21,36 @@
 
   </div>
 
-  <div class="z-depth-1 lighten-4 row">
+  <div class="z-depth-1 lighten-4 row"
+  style="padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-    {% get_comment_list for news as comment_list %}
-    {% for comment in comment_list %}
+  {% get_comment_list for news as comment_list %}
+  {% for comment in comment_list %}
 
-    <p>Posted by: {{ comment.user }} on {{ comment.submit_date }}</p>
-    <p>{{ comment.comment }}</p>
+  <p>Posted by: {{ comment.user }} on {{ comment.submit_date }}</p>
+  <p>{{ comment.comment }}</p>
 
-    {% endfor %}
+  {% endfor %}
 
 
-    {% if user.is_authenticated %}
-    {% get_comment_form for news as form %}
-    <form action="{% comment_form_target %}" method="POST">
-      {% csrf_token %}
-      {{ form.comment }}
-      {{ form.honeypot }}
-      {{ form.content_type }}
-      {{ form.object_pk }}
-      {{ form.timestamp }}
-      {{ form.security_hash }}
-      <input class="btn waves-effect waves-light" type="submit" value="Add comment" id="id_submit" />
-    </form>
-    {% else %}
-    <p>Please <a href="{% url 'auth_login' %}">log in</a> to leave a comment.</p>
-    {% endif %}
-  </div>
+  {% if user.is_authenticated %}
+  {% get_comment_form for news as form %}
+  <form action="{% comment_form_target %}" method="POST">
+    {% csrf_token %}
+    {{ form.comment }}
+    {{ form.content_type }}
+    {{ form.object_pk }}
+    {{ form.timestamp }}
+    {{ form.security_hash }}
+    <input class="btn waves-effect waves-light" type="submit" value="Add comment" id="id_submit" />
+    <input type="hidden" name="next" value="{{ request.path }}" />
+  </form>
+  {% else %}
+  <p>Please <a href="{% url 'auth_login' %}">log in</a> to leave a comment.</p>
+  {% endif %}
+  <br>
+  <br>
+</div>
 </div>
 
 <br>
