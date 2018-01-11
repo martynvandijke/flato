@@ -38,6 +38,8 @@ ALLOWED_HOSTS = [
 
 SITE_ID = 1
 
+LATEST_UPDATE = '2018-01-01 00:00:00'
+
 # Application definition
 
 INSTALLED_APPS = [

@@ -10,7 +10,8 @@ from django.views.generic import ListView, DetailView, TemplateView
 from .scraper import GeneralNews, Movies, TechNews, ScienceNews, BusinessNews, GamingNews, SportNews , PoliticalNews
 from django.db.models import Q
 from .forms import SignUpForm
-
+from datetime import datetime, timedelta
+from django.conf import settings
 
 '''
 Main view for the /feed
@@ -201,23 +202,28 @@ def index(request):
 
 def update(request):
 
+    print('Last database update:' + settings.LATEST_UPDATE)
+
     try:
-        GeneralNews()
+        GeneralNews(settings.LATEST_UPDATE)
     except:
         print("BBC News Error")
-
     try:
-        Movies()
+        Movies(LATEST_UPDATE)
     except:
         print("error")
-    BusinessNews()
-    TechNews()
-    ScienceNews()
-    GamingNews()
-    SportNews()
-    PoliticalNews()
 
-    return HttpResponse("updated database ")
+    BusinessNews(settings.LATEST_UPDATE)
+    TechNews(settings.LATEST_UPDATE)
+    ScienceNews(settings.LATEST_UPDATE)
+    GamingNews(settings.LATEST_UPDATE)
+    SportNews(settings.LATEST_UPDATE)
+    PoliticalNews(settings.LATEST_UPDATE)
+
+    settings.LATEST_UPDATE = str(datetime.now() + timedelta(hours=-1))
+    print('Updated Database at:' + settings.LATEST_UPDATE)
+
+    return redirect('/feed')
 
 '''
 Handle sign up
