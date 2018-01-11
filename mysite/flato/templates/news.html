@@ -1,26 +1,57 @@
 {% extends 'base.html' %}
+{% load comments %}
 
 {% block content %}
 
 {%if news %}
 <div class="container">
-    <div class="card">
-        <div class="card-image">
-            <img src="{{news.image}}">
-            <span class="card-title">{{news.title}}</span>
-        </div>
-        <div class="card-content">
-            <p>
-                {{news.description}}
-            </p>
-        </div>
-        <div class="card-action">
-            <a href="{{news.link}}">{{news.source}}</a>
-        </div>
-
+  <div class="card">
+    <div class="card-image">
+      <img src="{{news.image}}">
+      <span class="card-title">{{news.title}}</span>
     </div>
+    <div class="card-content">
+      <p>
+        {{news.description}}
+      </p>
+    </div>
+    <div class="card-action">
+      <a href="{{news.link}}">{{news.source}}</a>
+    </div>
+
+  </div>
+
+  <div class="z-depth-1 lighten-4 row">
+
+    {% get_comment_list for news as comment_list %}
+    {% for comment in comment_list %}
+
+    <p>Posted by: {{ comment.user }} on {{ comment.submit_date }}</p>
+    <p>{{ comment.comment }}</p>
+
+    {% endfor %}
+
+
+    {% if user.is_authenticated %}
+    {% get_comment_form for news as form %}
+    <form action="{% comment_form_target %}" method="POST">
+      {% csrf_token %}
+      {{ form.comment }}
+      {{ form.honeypot }}
+      {{ form.content_type }}
+      {{ form.object_pk }}
+      {{ form.timestamp }}
+      {{ form.security_hash }}
+      <input class="btn waves-effect waves-light" type="submit" value="Add comment" id="id_submit" />
+    </form>
+    {% else %}
+    <p>Please <a href="{% url 'auth_login' %}">log in</a> to leave a comment.</p>
+    {% endif %}
+  </div>
 </div>
 
+<br>
+<br>
 {% endif %}
 
 

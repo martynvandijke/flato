@@ -41,7 +41,8 @@ urlpatterns = [
 
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'registration/logout.html'}, name='logout'),
+    url(r'^signup/$', views.signup, name='signup'),
     url(r'^', include(router.urls)),
+    url(r'^comments/', include('django_comments.urls')),
 
 ]
-

@@ -1,13 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
 import json, requests
 from django.template import loader
-from django.shortcuts import redirect
 from .models import News, Movie
 from django.views.generic import ListView, DetailView, TemplateView
 from .scraper import GeneralNews, Movies, TechNews, ScienceNews, BusinessNews, GamingNews, SportNews , PoliticalNews
 from django.db.models import Q
+from .forms import SignUpForm
 
 
 '''
@@ -216,3 +218,20 @@ def update(request):
     PoliticalNews()
 
     return HttpResponse("updated database ")
+
+'''
+Handle sign up
+'''
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('news_list')
+    else:
+        form = SignUpForm()
+    return render(request, 'registration/signup.html', {'form': form})

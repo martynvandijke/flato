@@ -33,8 +33,8 @@ ALLOWED_HOSTS = [
     '10.0.3.172',
     'martynvandijke.nl',
     '10.0.3.20',
+    '127.0.0.1',
 ]
-
 
 
 # Application definition
@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django.contrib.sites',
+    'django_comments'
 ]
 
 
