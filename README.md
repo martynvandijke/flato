@@ -8,18 +8,16 @@ pass : testthis
 
 # To do list :
 - [ ] frontpage dashboard with apis
-- [ ] chat/comment system
-- [ ] User history -> notifications from threads 
-- [ ] Create account 
-- [ ] topics data api (movies,news,etc) -> 
-- [X] Performance lookup large database  postgress has very very good performance 
+- [ ] chat/comment system There is a comment system, but it's very basic
+- [ ] User history -> notifications from threads
+- [ ] topics data api (movies,news,etc) ->
+- [ ] Automatically fetch news in an elegant manner
+- [x] Filter out already fetched news
+- [x] Create account
+- [X] Performance lookup large database  postgress has very very good performance
 - [X] rest api
 - [x] account login
 - [X] new link generator
-
-todo:
-- Filter out already fetched news
-- Automatic fetch news
 
 
 funnky ideas (extra)
