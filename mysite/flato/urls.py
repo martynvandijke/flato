@@ -28,6 +28,8 @@ router.register(r'data', DataViewSet)
 
 urlpatterns = [
     url(r'^update/$', views.update, name='update'),
+    url(r'^updatedb/$', views.updatedb, name='updatedb'),
+
     url(r'^$', views.index, name='index'),
     url(r'^feed/$', views.MultipleModelView.as_view(), name='news_list'),
     # url(r'^feedupdate/$', views.MultipleModelView.as_view(), name='news_list'),

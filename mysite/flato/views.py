@@ -225,6 +225,29 @@ def update(request):
 
     return redirect('/feed')
 
+def updatedb(request):
+    print('Last database update:' + settings.LATEST_UPDATE)
+
+    try:
+        GeneralNews(settings.LATEST_UPDATE)
+    except:
+        print("BBC News Error")
+    try:
+        Movies(LATEST_UPDATE)
+    except:
+        print("error")
+
+    BusinessNews(settings.LATEST_UPDATE)
+    TechNews(settings.LATEST_UPDATE)
+    ScienceNews(settings.LATEST_UPDATE)
+    GamingNews(settings.LATEST_UPDATE)
+    SportNews(settings.LATEST_UPDATE)
+    PoliticalNews(settings.LATEST_UPDATE)
+
+    settings.LATEST_UPDATE = str(datetime.now() + timedelta(hours=-1))
+    print('Updated Database anonymously at:' + settings.LATEST_UPDATE)
+    return HttpResponse("Updated Database anonymously")
+
 '''
 Handle sign up
 '''

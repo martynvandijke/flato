@@ -6,6 +6,13 @@ user : webtech
 pass : testthis
 
 
+automatic update 
+
+'''
+while /bin/true; do wget -qO- http://127.0.0.1:8000/updatedb &> /dev/null  && sleep 10; done
+'''
+
+
 # To do list :
 - [ ] frontpage dashboard with apis
 - [ ] chat/comment system There is a comment system, but it's very basic
