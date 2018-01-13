@@ -209,16 +209,29 @@ def update(request):
     except:
         print("BBC News Error")
     try:
-        Movies(LATEST_UPDATE)
+        BusinessNews(settings.LATEST_UPDATE)
     except:
-        print("error")
-
-    BusinessNews(settings.LATEST_UPDATE)
-    TechNews(settings.LATEST_UPDATE)
-    ScienceNews(settings.LATEST_UPDATE)
-    GamingNews(settings.LATEST_UPDATE)
-    SportNews(settings.LATEST_UPDATE)
-    PoliticalNews(settings.LATEST_UPDATE)
+        print("Business News Error")
+    try:
+        TechNews(settings.LATEST_UPDATE)
+    except:
+        print("Tech News Error")
+    try:
+        ScienceNews(settings.LATEST_UPDATE)
+    except:
+        print("Tech News Error")
+    try:
+        GamingNews(settings.LATEST_UPDATE)
+    except:
+        print("Gaming News Error")
+    try:
+        SportNews(settings.LATEST_UPDATE)
+    except:
+        print("Sport News Error")
+    try:
+        PoliticalNews(settings.LATEST_UPDATE)
+    except:
+        print("Political News Error")
 
     settings.LATEST_UPDATE = str(datetime.now() + timedelta(hours=-1))
     print('Updated Database at:' + settings.LATEST_UPDATE)
@@ -233,16 +246,30 @@ def updatedb(request):
     except:
         print("BBC News Error")
     try:
-        Movies(LATEST_UPDATE)
+        BusinessNews(settings.LATEST_UPDATE)
     except:
-        print("error")
+        print("Business News Error")
+    try:
+        TechNews(settings.LATEST_UPDATE)
+    except:
+        print("Tech News Error")
+    try:
+        ScienceNews(settings.LATEST_UPDATE)
+    except:
+        print("Tech News Error")
+    try:
+        GamingNews(settings.LATEST_UPDATE)
+    except:
+        print("Gaming News Error")
+    try:
+        SportNews(settings.LATEST_UPDATE)
+    except:
+        print("Sport News Error")
+    try:
+        PoliticalNews(settings.LATEST_UPDATE)
+    except:
+        print("Political News Error")
 
-    BusinessNews(settings.LATEST_UPDATE)
-    TechNews(settings.LATEST_UPDATE)
-    ScienceNews(settings.LATEST_UPDATE)
-    GamingNews(settings.LATEST_UPDATE)
-    SportNews(settings.LATEST_UPDATE)
-    PoliticalNews(settings.LATEST_UPDATE)
 
     settings.LATEST_UPDATE = str(datetime.now() + timedelta(hours=-1))
     print('Updated Database anonymously at:' + settings.LATEST_UPDATE)
