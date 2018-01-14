@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'threadedcomments',
     'django_comments',
     'django.contrib.sites',
+    'blog',
 ]
 
 COMMENTS_APP = 'threadedcomments'
