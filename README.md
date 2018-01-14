@@ -15,10 +15,10 @@ while /bin/true; do wget -qO- http://127.0.0.1:8000/updatedb &> /dev/null  && sl
 
 # To do list :
 - [ ] frontpage dashboard with apis
-- [ ] chat/comment system There is a comment system, but it's very basic
 - [ ] User history -> notifications from threads
 - [ ] topics data api (movies,news,etc) ->
-- [ ] Automatically fetch news in an elegant manner
+- [x] Automatically fetch news in an hack manner
+- [x] chat/comment system
 - [x] Filter out already fetched news
 - [x] Create account
 - [X] Performance lookup large database  postgress has very very good performance
