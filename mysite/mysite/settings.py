@@ -51,10 +51,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'threadedcomments',
+    'django_comments',
     'django.contrib.sites',
-    'django_comments'
 ]
 
+COMMENTS_APP = 'threadedcomments'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
