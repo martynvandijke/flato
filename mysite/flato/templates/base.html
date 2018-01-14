@@ -174,6 +174,10 @@
       $(".button-collapse").sideNav();
       $('.modal').modal();
 
+      $(".comment_reply_link").click(function(){
+        $(this).siblings("#form-comment").toggle();
+      });
+
 
       $('.chips').material_chip();
       $('.chips').on('chip.delete', function(e, chip){
@@ -276,8 +280,6 @@
     aftershow: function(){} //Function for after opening timepicker
   });
 </script>
-
-
 
 <!--Import js -->
 
