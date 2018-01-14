@@ -4,6 +4,9 @@ from rest_framework import serializers, viewsets, routers
 from . import views
 from django.conf.urls import include, url
 from django.views.generic import ListView
+from blog import views
+from .models import Post
+
 
 
 
@@ -14,10 +17,16 @@ class DataSerilizer(serializers.ModelSerializer):
         fields = ( 'source','title','description',
                    'date','time','author','image','link'
                   )
-
+    class Meta:
+        model = Post
+        fields = ('author', 'title', 'text', 'created_date','published_date')
 class DataViewSet(viewsets.ModelViewSet):
     queryset = News.objects.all()
     serializer_class = DataSerilizer
+
+class DataViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()[:1]
+    serializer_class = PostSerializer
 
 
 
@@ -29,6 +38,10 @@ router.register(r'data', DataViewSet)
 urlpatterns = [
     url(r'^update/$', views.update, name='update'),
     url(r'^updatedb/$', views.updatedb, name='updatedb'),
+
+    url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
+    url(r'^post/new/$', views.post_new, name='post_new'),
+    url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name='post_edit'),
 
     url(r'^$', views.index, name='index'),
     url(r'^feed/$', views.MultipleModelView.as_view(), name='news_list'),
