@@ -1,21 +1,17 @@
 # flato
 
-A modern news aggregation site 
+user account:
 
-### User account:
-
-user : *_webtech_*  
-pass : *_testthis_*
+user : webtech
+pass : testthis
 
 
-Wget commando to preform automatic update database.
+automatic update 
 
-```
+'''
 while /bin/true; do wget -qO- http://127.0.0.1:8000/updatedb &> /dev/null  && sleep 10; done
-```
+'''
 
-![alt text](docs/macbook.png "Flato")
-![alt text](docs/nexus5x.png "Flato mobile")
 
 # To do list :
 - [ ] frontpage dashboard with apis
@@ -29,15 +25,16 @@ while /bin/true; do wget -qO- http://127.0.0.1:8000/updatedb &> /dev/null  && sl
 - [X] rest api
 - [x] account login
 - [X] new link generator
-- [X] Search topic
 
 
+funnky ideas (extra)
 
+infinite scroll
 
-## Extra: 
+playable games
 
+downloadable data dribble
 
-- infinite scroll
-- playable games
-- downloadable data dribble
-- Set date interval
+Search topic
+
+Set date interval

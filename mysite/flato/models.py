@@ -37,6 +37,11 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+
+class Frontpage(models.Model):
+    image = models.TextField(null=True, blank=True)
+
+
 ## news model
 class News(models.Model):
     source = models.TextField(null=True, blank=True)

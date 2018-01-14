@@ -12,7 +12,6 @@ from django.db.models import Q
 from .forms import SignUpForm
 from datetime import datetime, timedelta
 from django.conf import settings
-import time
 
 '''
 Main view for the /feed
@@ -241,7 +240,7 @@ def update(request):
 
 def updatedb(request):
     print('Last database update:' + settings.LATEST_UPDATE)
-    start = time.clock()
+
     try:
         GeneralNews(settings.LATEST_UPDATE)
     except:
@@ -270,8 +269,7 @@ def updatedb(request):
         PoliticalNews(settings.LATEST_UPDATE)
     except:
         print("Political News Error")
-    last = time.clock()
-    print(last-start)
+
 
     settings.LATEST_UPDATE = str(datetime.now() + timedelta(hours=-1))
     print('Updated Database anonymously at:' + settings.LATEST_UPDATE)
