@@ -55,10 +55,9 @@ INSTALLED_APPS = [
     'django_comments',
     'django.contrib.sites',
 <<<<<<< HEAD
-    'django_comments',
-    'django_extensions'
 =======
->>>>>>> d1e57e7ef975fd98edf704dc734647d9cea84fab
+    'blog',
+>>>>>>> niel
 ]
 
 COMMENTS_APP = 'threadedcomments'
@@ -79,7 +78,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'flato.middlewares.CallgraphMiddleware'
 ]
 
 ROOT_URLCONF = 'mysite.urls'

@@ -15,14 +15,26 @@
                class="btn-large waves-effect waves-light">To The Feed</a>
         </div>
         <div class="row center">
-            <a href="/blog"
+            <a href="/post_list"
                class="btn-large waves-effect waves-light">About Us</a>
         </div>
         <br>
     </div>
 </div>
 
+  <div class="slider">
+    <ul class="slides">
+        {% for image in images %}
 
+
+      <li>
+        <img src="https://lorempixel.com/580/250/nature/1"> <!-- random image -->
+      </li>
+
+
+        {% endfor %}
+    </ul>
+  </div>
 
 
 
