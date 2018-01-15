@@ -16,9 +16,20 @@ class DataSerilizer(serializers.ModelSerializer):
                   )
 
 class DataViewSet(viewsets.ModelViewSet):
-    queryset = News.objects.all()
+    queryset = News.objects.all()[:100]
     serializer_class = DataSerilizer
 
+class CommentsSerilizer(serializers.ModelSerializer):
+
+    class Meta:
+        model = News
+        fields = ( 'source','title','description',
+                   'date','time','author','image','link'
+                  )
+
+class DataViewSet(viewsets.ModelViewSet):
+    queryset = News.objects.all()
+    serializer_class = DataSerilizer
 
 
 router = routers.DefaultRouter()
