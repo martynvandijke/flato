@@ -54,8 +54,8 @@ INSTALLED_APPS = [
     'threadedcomments',
     'django_comments',
     'django.contrib.sites',
-    'django_extensions'
-    'blog'
+    'django_extensions',
+    'blog.apps.BlogConfig'
 ]
 
 COMMENTS_APP = 'threadedcomments'
@@ -98,7 +98,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-TEMPLATE_DIRS = ('mysite/flato/templates', '/var/templates/mysite')
+TEMPLATE_DIRS = ('mysite/flato/templates', '/var/templates/mysite', 'mysite/blog/templates')
 
 
 # Database

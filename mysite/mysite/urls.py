@@ -52,6 +52,7 @@ router.register(r'users', UserViewSet)
 
 urlpatterns = [
     url(r'^', include('flato.urls')),
+    url(r'^', include('blog.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
     url(r'^rest/', include('rest_framework.urls', namespace='rest_framework')),

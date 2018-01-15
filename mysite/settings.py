@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from django.apps import apps
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,12 +27,25 @@ SECRET_KEY = '@-qmcer19zhn5&86w@frmzf+wn^uispssz!rdom*vlbf9259^%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '2id60.win.tue.nl',
+    'flato.vandijke.xyz',
+    '10.0.3.172',
+    'martynvandijke.nl',
+    '10.0.3.20',
+    '127.0.0.1',
+]
 
+
+SITE_ID = 1
+
+LATEST_UPDATE = '2018-01-01 00:00:00'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'flato.apps.FlatoConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +54,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'rest_framework',
-    'snippets.apps.SnippetsConfig'
+    'snippets.apps.SnippetsConfig',
+    'django.contrib.sites',
+    'django_comments',
+    'django_extensions',
+
 ]
 
 MIDDLEWARE = [
@@ -116,10 +135,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+TEMPLATE_DIRS = ('mysite/flato/templates', '/var/templates/mysite')
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-ALLOWED_HOSTS = ['127.0.0.1','localhost', 't434733.pythonanywhere.com','t510192.pythonanywhere.com']

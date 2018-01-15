@@ -15,14 +15,49 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from blog import views
+from django.contrib.auth.models import User
+from rest_framework import serializers, viewsets, routers
+
+from mysite.blog.blog import views
+
+'''
+Serializes the users info 
+'''
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    # profile = ProfileSerializer()
+    # room_status = serializers.CharField(source='profile.room_status')
+    # wheater_city = serializers.CharField(source='profile.wheater_city')
+
+    class Meta:
+        model = User
+        fields = ('url', 'username', 'email', 'first_name','last_name','last_login','date_joined')
+
+
+
+
+
+'''
+ViewSets define the view behavior.
+'''
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+2
+'''
+Add the url to django
+'''
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('flato.urls')),
+
     url(r'', include('blog.urls')),
     url(r'^', include('blog.urls')),
     url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
     url(r'^post/new/$', views.post_new, name='post_new'),
+    url(r'^rest/', include('rest_framework.urls', namespace='rest_framework')),
 
     #url(r'^', include('snippets.urls')),
 ]
